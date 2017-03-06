@@ -7,7 +7,7 @@ A Javascript event emitter implementation without any dependencies.
 
 ## Test
 ```bash
-./scripts/test
+yarn run test
 ```
 
 ## Contribute
@@ -15,8 +15,7 @@ A Javascript event emitter implementation without any dependencies.
 ```bash
 git clone https://github.com/axetroy/.eevent-emitter.js.git
 cd ./.eevent-emitter.js
-yarn
-yarn run test
+yarn run watch
 ```
 
 You can flow [Contribute Guide](https://github.com/axetroy/.eevent-emitter.js/blob/master/contributing.md)
