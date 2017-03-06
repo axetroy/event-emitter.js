@@ -28,9 +28,13 @@ prototype.on = function (event, handler) {
   }
 };
 
-prototype.off = event => this.e[event] = [];
+prototype.off = function (event) {
+  this.e[event] = [];
+};
 
-prototype.clear = this.e = {};
+prototype.clear = function () {
+  this.e = {};
+};
 
 prototype.once = function (event, handler) {
   let container = this.e[event] = this.e[event] || [], _this = this, id = randomId(), index;
