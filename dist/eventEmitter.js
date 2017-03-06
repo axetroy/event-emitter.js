@@ -118,10 +118,12 @@ prototype.on = function (event, handler) {
 };
 
 prototype.off = function (event) {
-  return undefined.e[event] = [];
+  this.e[event] = [];
 };
 
-prototype.clear = undefined.e = {};
+prototype.clear = function () {
+  this.e = {};
+};
 
 prototype.once = function (event, handler) {
   var container = this.e[event] = this.e[event] || [],
