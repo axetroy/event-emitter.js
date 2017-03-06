@@ -88,16 +88,17 @@ return /******/ (function(modules) { // webpackBootstrap
  */
 
 function randomId() {
-  var str = '',
-      len = 20;
-  while (len--) {
-    str += String.fromCharCode(48 + ~~(Math.random() * 42));
-  }
-  return str + ':::' + new Date().getTime();
+  return Math.random().toString(36).substr(2, 16);
 }
 
 function EventEmitter() {
   this.e = {};
+}
+
+function findIndexById(id) {
+  return this.findIndex(function (callback) {
+    return callback.__id__ === id;
+  });
 }
 
 var prototype = EventEmitter.prototype;
@@ -105,35 +106,31 @@ var prototype = EventEmitter.prototype;
 prototype.constructor = EventEmitter;
 
 prototype.on = function (event, handler) {
-  var container = this.e[event] = this.e[event] || [];
-  var id = randomId();
+  var container = this.e[event] = this.e[event] || [],
+      id = randomId(),
+      index = void 0;
   handler.__id__ = id;
   container.push(handler);
   return function () {
-    var index = container.findIndex(function (callback) {
-      return callback.__id__ === id;
-    });
+    index = findIndexById.call(container, id);
     index >= 0 ? container.splice(index, 1) : void 0;
   };
 };
 
 prototype.off = function (event) {
-  this.e[event] = [];
+  return undefined.e[event] = [];
 };
 
-prototype.clear = function () {
-  this.e = {};
-};
+prototype.clear = undefined.e = {};
 
 prototype.once = function (event, handler) {
-  var container = this.e[event] = this.e[event] || [];
-  var _this = this;
-  var id = randomId();
+  var container = this.e[event] = this.e[event] || [],
+      _this = this,
+      id = randomId(),
+      index = void 0;
 
   var callback = function callback() {
-    var index = container.findIndex(function (_callback) {
-      return callback.__id__ === id;
-    });
+    index = findIndexById.call(container, id);
     index >= 0 ? container.splice(index, 1) : void 0;
     handler.apply(_this, arguments);
   };
@@ -143,11 +140,13 @@ prototype.once = function (event, handler) {
   container.push(callback);
 };
 
-prototype.emit = function (event, data) {
+prototype.emit = function () {
   var _this2 = this;
 
+  var argv = [].slice.call(arguments),
+      event = argv.shift();
   (this.e[event] || []).forEach(function (handler) {
-    handler.call(_this2, data);
+    return handler.apply(_this2, argv);
   });
 };
 
