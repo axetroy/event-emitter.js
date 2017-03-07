@@ -5,6 +5,9 @@ const pkg = require('./package.json');
 
 const buildid = `build-${process.env.TRAVIS_JOB_NUMBER || `1988${pkg.name}`}`;
 
+console.log(process.env.TRAVIS_JOB_NUMBER);
+console.log(buildid);
+
 module.exports = {
   "src_folders": ["test/e2e"],
   "output_folder": "reports",
