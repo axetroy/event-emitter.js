@@ -2,7 +2,7 @@
  * Created by axetroy on 2017/3/6.
  */
 import test from 'ava';
-import EventEmitter from '../index';
+import EventEmitter from '../../index';
 
 let event;
 
