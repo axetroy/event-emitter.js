@@ -1,7 +1,7 @@
 {
   "name": "@axetroy/event-emitter.js",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Javascript event emitter implementation without any dependencies. only 1.4Kb",
   "main": "./dist/eventEmitter.js",
   "scripts": {
     "test": "ava",
