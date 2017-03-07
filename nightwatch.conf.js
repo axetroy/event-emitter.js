@@ -16,17 +16,17 @@ module.exports = {
   "page_objects_path": "",
   "globals_path": "",
 
-  // "selenium": {
-  //   "start_process": true,
-  //   "server_path": "",
-  //   "log_path": "",
-  //   "port": 4444,
-  //   "cli_args": {
-  //     "webdriver.chrome.driver": "",
-  //     "webdriver.gecko.driver": "",
-  //     "webdriver.edge.driver": ""
-  //   }
-  // },
+  "selenium": {
+    "start_process": true,
+    "server_path": "",
+    "log_path": "",
+    "port": 4444,
+    "cli_args": {
+      "webdriver.chrome.driver": "",
+      "webdriver.gecko.driver": "",
+      "webdriver.edge.driver": ""
+    }
+  },
 
   "test_settings": {
     "default": {
