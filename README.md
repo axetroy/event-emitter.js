@@ -36,11 +36,11 @@ event.off('greet');
 event.emit('greet', 'Axetroy');   // nothing happen
 ```
 
-### event.on(String event, Function handler(...data))
+### event.on(String event, Function listener(...data))
 
 listen an event, return a Function to remove this listener.
 
-### event.once(String event, Function handler(...data))
+### event.once(String event, Function listener(...data))
 
 listen an event only once, it will remove the listener once it trigger
 
@@ -55,6 +55,23 @@ clean all listener
 ### event.emit(String event, ...data)
 
 fire an event, without an optional data, data can be multiple arguments
+
+### event.emitting(String event, Array dataArray, Function listener)
+
+**do not invoke this method in manual.**
+
+use this method extend your event emitter
+
+```javascript
+class MyEventEmitter extends EventEmitter {
+  emitting(event, dataArray, listener) {
+    const start = Date.now();
+    listener.apply(this, dataArray);    // the default method is only contain this line
+    const time = Date.now() - start;
+    console.log('time: ' + time);
+  }
+}
+```
 
 ## Test
 ```bash
