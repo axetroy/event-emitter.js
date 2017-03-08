@@ -18,13 +18,13 @@ const prototype = EventEmitter.prototype;
 
 prototype.constructor = EventEmitter;
 
-prototype.on = function (event, handler) {
-  let container = this.e[event] = this.e[event] || [], id = randomId(), index;
-  handler.__id__ = id;
-  container.push(handler);
+prototype.on = function (event, listener) {
+  let self = this, container = self.e[event] = self.e[event] || [], id = randomId(), index;
+  listener.__id__ = id;
+  container.push(listener);
   return () => {
     index = findIndexById.call(container, id);
-    index >= 0 ? container.splice(index, 1) : void 0;
+    index >= 0 && container.splice(index, 1);
   }
 };
 
@@ -36,23 +36,23 @@ prototype.clear = function () {
   this.e = {};
 };
 
-prototype.once = function (event, handler) {
-  let container = this.e[event] = this.e[event] || [], _this = this, id = randomId(), index;
-
-  const callback = function () {
+prototype.once = function (event, listener) {
+  let self = this, container = self.e[event] = self.e[event] || [], _this = self, id = randomId(), index, callback = function () {
     index = findIndexById.call(container, id);
-    index >= 0 ? container.splice(index, 1) : void 0;
-    handler.apply(_this, arguments);
+    index >= 0 && container.splice(index, 1);
+    listener.apply(_this, arguments);
   };
-
   callback.__id__ = id;
-
   container.push(callback);
 };
 
 prototype.emit = function () {
-  const argv = [].slice.call(arguments), event = argv.shift();
-  (this.e[event] || []).forEach((handler) => handler.apply(this, argv));
+  const self = this, argv = [].slice.call(arguments), event = argv.shift();
+  (self.e[event] || []).forEach((listener) => self.emitting(event, argv, listener));
+};
+
+prototype.emitting = function (event, dataArray, listener) {
+  listener.apply(this, dataArray);
 };
 
 module.exports = EventEmitter;
