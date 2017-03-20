@@ -1,17 +1,21 @@
 /**
  * Created by axetroy on 2017/3/6.
  */
+let name = '@axetroy/event-emitter.js';
 
 function randomId() {
   return Math.random().toString(36).substr(2, 16);
 }
 
-function EventEmitter() {
-  this.e = {};
-}
-
 function findIndexById(id) {
   return this.findIndex(callback => callback.__id__ === id);
+}
+
+const defineProperty = Object.defineProperty;
+
+function EventEmitter() {
+  this[name] = {};
+  defineProperty && defineProperty(this, name, {enumerable: false,configurable: false});
 }
 
 const prototype = EventEmitter.prototype;
@@ -19,7 +23,7 @@ const prototype = EventEmitter.prototype;
 prototype.constructor = EventEmitter;
 
 prototype.on = function (event, listener) {
-  let self = this, container = self.e[event] = self.e[event] || [], id = randomId(), index;
+  let self = this, container = self[name][event] = self[name][event] || [], id = randomId(), index;
   listener.__id__ = id;
   container.push(listener);
   return () => {
@@ -29,15 +33,15 @@ prototype.on = function (event, listener) {
 };
 
 prototype.off = function (event) {
-  this.e[event] = [];
+  this[name][event] = [];
 };
 
 prototype.clear = function () {
-  this.e = {};
+  this[name] = {};
 };
 
 prototype.once = function (event, listener) {
-  let self = this, container = self.e[event] = self.e[event] || [], _this = self, id = randomId(), index, callback = function () {
+  let self = this, container = self[name][event] = self[name][event] || [], _this = self, id = randomId(), index, callback = function () {
     index = findIndexById.call(container, id);
     index >= 0 && container.splice(index, 1);
     listener.apply(_this, arguments);
@@ -48,7 +52,7 @@ prototype.once = function (event, listener) {
 
 prototype.emit = function () {
   const self = this, argv = [].slice.call(arguments), event = argv.shift();
-  (self.e[event] || []).forEach((listener) => self.emitting(event, argv, listener));
+  (self[name][event] || []).forEach((listener) => self.emitting(event, argv, listener));
 };
 
 prototype.emitting = function (event, dataArray, listener) {
