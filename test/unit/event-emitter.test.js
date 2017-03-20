@@ -1,8 +1,11 @@
 /**
  * Created by axetroy on 2017/3/6.
  */
+import pkg from '../../package.json';
 import test from 'ava';
 import EventEmitter from '../../index';
+
+const name = pkg.name;
 
 let event;
 
@@ -67,12 +70,12 @@ test('.off()', async t => {
     apply = true;
   });
 
-  t.is(event.e["hello"].length, 1);
+  t.is(event[name]["hello"].length, 1);
 
   event.off('hello');
 
-  t.is(event.e["hello"].length, 0);
-  t.deepEqual(event.e["hello"], []);
+  t.is(event[name]["hello"].length, 0);
+  t.deepEqual(event[name]["hello"], []);
   event.emit('hello');
   t.false(apply);
 });
@@ -88,12 +91,12 @@ test('.off() cancel this event listener', async t => {
   event.on('hello', handler);
 
 
-  t.is(event.e["hello"].length, 2);
+  t.is(event[name]["hello"].length, 2);
 
   event.off('hello');
 
-  t.is(event.e["hello"].length, 0);
-  t.deepEqual(event.e["hello"], []);
+  t.is(event[name]["hello"].length, 0);
+  t.deepEqual(event[name]["hello"], []);
   event.emit('hello');
   t.false(apply);
 });
@@ -109,11 +112,11 @@ test('.clear()', async t => {
   event.on('hello', handler);
 
 
-  t.is(Object.keys(event.e).length, 2);
+  t.is(Object.keys(event[name]).length, 2);
 
   event.clear();
 
-  t.is(Object.keys(event.e).length, 0);
+  t.is(Object.keys(event[name]).length, 0);
   event.emit('hello');
   event.emit('say');
   t.false(apply);
