@@ -78,21 +78,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/***/ (function(module, exports) {
 
 /**
  * Created by axetroy on 2017/3/6.
  */
+var name = '@axetroy/event-emitter.js';
 
 function randomId() {
   return Math.random().toString(36).substr(2, 16);
-}
-
-function EventEmitter() {
-  this.e = {};
 }
 
 function findIndexById(id) {
@@ -101,13 +95,20 @@ function findIndexById(id) {
   });
 }
 
+var defineProperty = Object.defineProperty;
+
+function EventEmitter() {
+  this[name] = {};
+  defineProperty && defineProperty(this, name, { enumerable: false, configurable: false });
+}
+
 var prototype = EventEmitter.prototype;
 
 prototype.constructor = EventEmitter;
 
 prototype.on = function (event, listener) {
   var self = this,
-      container = self.e[event] = self.e[event] || [],
+      container = self[name][event] = self[name][event] || [],
       id = randomId(),
       index = void 0;
   listener.__id__ = id;
@@ -119,16 +120,16 @@ prototype.on = function (event, listener) {
 };
 
 prototype.off = function (event) {
-  this.e[event] = [];
+  this[name][event] = [];
 };
 
 prototype.clear = function () {
-  this.e = {};
+  this[name] = {};
 };
 
 prototype.once = function (event, listener) {
   var self = this,
-      container = self.e[event] = self.e[event] || [],
+      container = self[name][event] = self[name][event] || [],
       _this = self,
       id = randomId(),
       index = void 0,
@@ -145,7 +146,7 @@ prototype.emit = function () {
   var self = this,
       argv = [].slice.call(arguments),
       event = argv.shift();
-  (self.e[event] || []).forEach(function (listener) {
+  (self[name][event] || []).forEach(function (listener) {
     return self.emitting(event, argv, listener);
   });
 };
