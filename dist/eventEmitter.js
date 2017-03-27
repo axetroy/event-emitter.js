@@ -146,7 +146,7 @@ prototype.emit = function () {
   var self = this,
       argv = [].slice.call(arguments),
       event = argv.shift();
-  (self[name][event] || []).forEach(function (listener) {
+  (self[name]['*'] || []).concat(self[name][event] || []).forEach(function (listener) {
     return self.emitting(event, argv, listener);
   });
 };
