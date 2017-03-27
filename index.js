@@ -15,7 +15,7 @@ const defineProperty = Object.defineProperty;
 
 function EventEmitter() {
   this[name] = {};
-  defineProperty && defineProperty(this, name, {enumerable: false,configurable: false});
+  defineProperty && defineProperty(this, name, {enumerable: false, configurable: false});
 }
 
 const prototype = EventEmitter.prototype;
@@ -52,7 +52,7 @@ prototype.once = function (event, listener) {
 
 prototype.emit = function () {
   const self = this, argv = [].slice.call(arguments), event = argv.shift();
-  (self[name][event] || []).forEach((listener) => self.emitting(event, argv, listener));
+  ((self[name]['*'] || []).concat(self[name][event] || [])).forEach((listener) => self.emitting(event, argv, listener));
 };
 
 prototype.emitting = function (event, dataArray, listener) {
