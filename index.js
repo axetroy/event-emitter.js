@@ -51,8 +51,8 @@ prototype.once = function (event, listener) {
 };
 
 prototype.emit = function () {
-  const self = this, argv = [].slice.call(arguments), event = argv.shift();
-  ((self[name]['*'] || []).concat(self[name][event] || [])).forEach((listener) => self.emitting(event, argv, listener));
+  const self = this, argv = [].slice.call(arguments), event = argv.shift(), events = self[name];
+  ((events['*'] || []).concat(events[event] || [])).forEach((listener) => self.emitting(event, argv, listener));
 };
 
 prototype.emitting = function (event, dataArray, listener) {
