@@ -51,7 +51,7 @@ prototype.once = function (event, listener) {
 };
 
 prototype.emit = function () {
-  const self = this, argv = [].slice.call(arguments), event = argv.shift(), events = self[name];
+  const argv = [].slice.call(arguments), event = argv.shift(), events = this[name];
   ((events['*'] || []).concat(events[event] || [])).forEach((listener) => self.emitting(event, argv, listener));
 };
 
