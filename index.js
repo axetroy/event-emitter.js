@@ -1,14 +1,15 @@
 /**
  * Created by axetroy on 2017/3/6.
  */
-let name = '@axetroy/event-emitter.js';
+const name = '@axetroy/event-emitter.js';
+const id_Identifier = '__id__';
 
 function randomId() {
   return Math.random().toString(36).substr(2, 16);
 }
 
 function findIndexById(id) {
-  return this.findIndex(callback => callback.__id__ === id);
+  return this.findIndex(callback => callback[id_Identifier] === id);
 }
 
 const defineProperty = Object.defineProperty;
@@ -23,8 +24,8 @@ const prototype = EventEmitter.prototype;
 prototype.constructor = EventEmitter;
 
 prototype.on = function (event, listener) {
-  let self = this, container = self[name][event] = self[name][event] || [], id = randomId(), index;
-  listener.__id__ = id;
+  let events = this[name], container = events[event] = events[event] || [], id = randomId(), index;
+  listener[id_Identifier] = id;
   container.push(listener);
   return () => {
     index = findIndexById.call(container, id);
@@ -41,17 +42,17 @@ prototype.clear = function () {
 };
 
 prototype.once = function (event, listener) {
-  let self = this, container = self[name][event] = self[name][event] || [], _this = self, id = randomId(), index, callback = function () {
+  let self = this, events = self[name], container = events[event] = events[event] || [], id = randomId(), index, callback = function () {
     index = findIndexById.call(container, id);
     index >= 0 && container.splice(index, 1);
-    listener.apply(_this, arguments);
+    listener.apply(self, arguments);
   };
-  callback.__id__ = id;
+  callback[id_Identifier] = id;
   container.push(callback);
 };
 
 prototype.emit = function () {
-  const argv = [].slice.call(arguments), event = argv.shift(), events = this[name];
+  const self = this, argv = [].slice.call(arguments), event = argv.shift(), events = self[name];
   ((events['*'] || []).concat(events[event] || [])).forEach((listener) => self.emitting(event, argv, listener));
 };
 
