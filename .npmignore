@@ -59,10 +59,16 @@ jspm_packages
 .pullapprove.yml
 .travis.yml
 contributing.md
-webpack.config.js
 
 # Test
 test
 
 reports
 
+example
+webpack.*.js
+yarn*
+nightwatch.conf.js
+.gpmrc
+.editorconfig
+.babelrc
