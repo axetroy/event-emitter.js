@@ -29,7 +29,7 @@
     "nightwatch": "^0.9.12",
     "saucelabs": "^1.4.0",
     "unminified-webpack-plugin": "^1.2.0",
-    "webpack": "^2.2.1",
+    "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
   }
 }
