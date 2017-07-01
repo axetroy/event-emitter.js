@@ -3,6 +3,7 @@
   "version": "1.2.1",
   "description": "A Javascript event emitter implementation without any dependencies. only 1.4Kb",
   "main": "./dist/eventEmitter.js",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "ava ./test/unit",
     "random": "$ ( ( (RANDOM % n) + 1 ))",

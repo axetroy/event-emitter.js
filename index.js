@@ -1,6 +1,8 @@
 /**
  * Created by axetroy on 2017/3/6.
  */
+/// <reference path="./index.d.ts" />
+
 const name = '@axetroy/event-emitter.js';
 const id_Identifier = '__id__';
 
