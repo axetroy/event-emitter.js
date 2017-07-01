@@ -78,11 +78,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /**
  * Created by axetroy on 2017/3/6.
  */
+/// <reference path="./index.d.ts" />
+
 var name = '@axetroy/event-emitter.js';
 var id_Identifier = '__id__';
 
@@ -148,7 +152,7 @@ prototype.emit = function () {
       argv = [].slice.call(arguments),
       event = argv.shift(),
       events = self[name];
-  (events['*'] || []).concat(events[event] || []).forEach(function (listener) {
+  (events['*'] || []).concat(events[event] || []).map(function (listener) {
     return self.emitting(event, argv, listener);
   });
 };
@@ -157,7 +161,7 @@ prototype.emitting = function (event, dataArray, listener) {
   listener.apply(this, dataArray);
 };
 
-module.exports = EventEmitter;
+/* harmony default export */ __webpack_exports__["default"] = EventEmitter;
 
 /***/ })
 /******/ ]);
