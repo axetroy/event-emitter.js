@@ -62,4 +62,4 @@ prototype.emitting = function (event, dataArray, listener) {
   listener.apply(this, dataArray);
 };
 
-module.exports = EventEmitter;
+export default EventEmitter;

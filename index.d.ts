@@ -13,3 +13,5 @@ declare class EventEmitter {
 
   emitting(event: string, dataArray: any[], listener: Function): void;
 }
+
+export default EventEmitter
