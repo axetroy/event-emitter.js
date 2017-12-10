@@ -2,6 +2,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/axetroy/event-emitter.js.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/axetroy/event-emitter.js.svg?branch=master)](https://travis-ci.org/axetroy/event-emitter.js)
+[![Coverage Status](https://coveralls.io/repos/github/axetroy/event-emitter.js/badge.svg?branch=master)](https://coveralls.io/github/axetroy/event-emitter.js?branch=master)
 [![Dependency](https://david-dm.org/axetroy/event-emitter.js.svg)](https://david-dm.org/axetroy/event-emitter.js)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 [![Prettier](https://img.shields.io/badge/Code%20Style-Prettier-green.svg)](https://github.com/prettier/prettier)
