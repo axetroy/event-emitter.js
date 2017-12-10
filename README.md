@@ -2,12 +2,10 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/axetroy/event-emitter.js.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/axetroy/event-emitter.js.svg?branch=master)](https://travis-ci.org/axetroy/event-emitter.js)
-[![Build Status](https://saucelabs.com/buildstatus/axetroy)](https://saucelabs.com/beta/builds/05b1e575f3a74adda7203d4c4078a71e)
 [![Dependency](https://david-dm.org/axetroy/event-emitter.js.svg)](https://david-dm.org/axetroy/event-emitter.js)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 [![Prettier](https://img.shields.io/badge/Code%20Style-Prettier-green.svg)](https://github.com/prettier/prettier)
 [![npm version](https://badge.fury.io/js/%40axetroy%2Fevent-emitter.js.svg)](https://badge.fury.io/js/%40axetroy%2Fevent-emitter.js)
-[![Build Status](https://saucelabs.com/browser-matrix/axetroy.svg)](https://saucelabs.com/beta/builds/05b1e575f3a74adda7203d4c4078a71e)
 
 A Javascript event emitter implementation without any dependencies.
 

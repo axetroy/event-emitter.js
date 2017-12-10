@@ -1,9 +1,9 @@
 /**
  * Created by axetroy on 2017/3/6.
  */
-import pkg from '../../package.json';
+import pkg from './package.json';
 import test from 'ava';
-import EventEmitter from '../../index';
+import EventEmitter from './index';
 
 const name = pkg.name;
 
@@ -16,7 +16,7 @@ test.beforeEach(t => {
 
 test('.on()', t => {
   let apply = false;
-  event.on('hello', function (data) {
+  event.on('hello', function(data) {
     apply = true;
     t.deepEqual(data, 'Axetroy');
   });
@@ -26,7 +26,7 @@ test('.on()', t => {
 
 test('.on() cancel the listener', async t => {
   let count = 0;
-  const cancel = event.on('hello', function (data) {
+  const cancel = event.on('hello', function(data) {
     count++;
   });
   t.deepEqual(count, 0);
@@ -47,7 +47,7 @@ test('.on() cancel the listener', async t => {
 
 test('.once()', async t => {
   let count = 0;
-  event.once('hello', function (data) {
+  event.once('hello', function(data) {
     count++;
   });
   t.deepEqual(count, 0);
@@ -66,16 +66,16 @@ test('.once()', async t => {
 
 test('.off()', async t => {
   let apply = false;
-  event.on('hello', function () {
+  event.on('hello', function() {
     apply = true;
   });
 
-  t.is(event[name]["hello"].length, 1);
+  t.is(event[name]['hello'].length, 1);
 
   event.off('hello');
 
-  t.is(event[name]["hello"].length, 0);
-  t.deepEqual(event[name]["hello"], []);
+  t.is(event[name]['hello'].length, 0);
+  t.deepEqual(event[name]['hello'], []);
   event.emit('hello');
   t.false(apply);
 });
@@ -90,13 +90,12 @@ test('.off() cancel this event listener', async t => {
   event.on('hello', handler);
   event.on('hello', handler);
 
-
-  t.is(event[name]["hello"].length, 2);
+  t.is(event[name]['hello'].length, 2);
 
   event.off('hello');
 
-  t.is(event[name]["hello"].length, 0);
-  t.deepEqual(event[name]["hello"], []);
+  t.is(event[name]['hello'].length, 0);
+  t.deepEqual(event[name]['hello'], []);
   event.emit('hello');
   t.false(apply);
 });
@@ -110,7 +109,6 @@ test('.clear()', async t => {
 
   event.on('say', handler);
   event.on('hello', handler);
-
 
   t.is(Object.keys(event[name]).length, 2);
 
